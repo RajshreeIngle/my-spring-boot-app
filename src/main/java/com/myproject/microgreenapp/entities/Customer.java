@@ -11,7 +11,7 @@ import lombok.Data;
 public class Customer {
 	
 	@Id
-	private int contactNo;
+	private long contactNo;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -19,5 +19,6 @@ public class Customer {
 	private int pincode;
 	private String state;
 	private String email;
+	private String password;
 	
 }

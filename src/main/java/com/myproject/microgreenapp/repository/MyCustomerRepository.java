@@ -1,10 +1,12 @@
 package com.myproject.microgreenapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.myproject.microgreenapp.entities.Customer;
 
-public interface MyCustomerRepository extends JpaRepository<Customer, Integer>{
+@Repository
+public interface MyCustomerRepository extends JpaRepository<Customer, Long>{
 
 
 }
