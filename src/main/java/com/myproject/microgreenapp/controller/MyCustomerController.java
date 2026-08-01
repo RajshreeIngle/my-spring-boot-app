@@ -18,6 +18,8 @@ import com.myproject.microgreenapp.entities.Customer;
 import com.myproject.microgreenapp.mappers.CustomerMapper;
 import com.myproject.microgreenapp.services.MyCustomerService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/customer")
 public class MyCustomerController {
@@ -49,22 +51,22 @@ public class MyCustomerController {
 	
 	//Adding new customer
 	@PostMapping("/addcustomer")
-	public Customer addCustomer(@RequestBody Customer customer) {
+	public Customer addCustomer(@Valid @RequestBody Customer customer) {
 		return myCustomerService.addCustomer(customer);	
 	}
 	
 	//updating customer data
 	@PutMapping("/updatecustomer/{contact}")
-	public ResponseEntity<Customer> updateCustomer(@PathVariable long contact, @RequestBody Customer customer){
+	public ResponseEntity<CustomerDto> updateCustomer(@Valid @PathVariable long contact, @RequestBody Customer customer){
 		Customer updatedCustomer = myCustomerService.updateCustomer(contact, customer);
 		if(updatedCustomer == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok().body(updatedCustomer);
+		return ResponseEntity.ok().body(customerMapper.toCustomerDto(updatedCustomer));
 	}
 	
 	@DeleteMapping("/deletecustomer/{contact}")
-	public String deleteCustomer(@PathVariable long contact) {
+	public String deleteCustomer(@Valid @PathVariable long contact) {
 		return myCustomerService.deleteCustomer(contact);
 	}
 	

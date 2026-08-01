@@ -3,6 +3,7 @@ package com.myproject.microgreenapp.exceptionhandling;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,13 +19,13 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public Map<String, String> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+	public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
 		Map<String, String> errorMap= new HashMap<>();
 		e.getBindingResult().getAllErrors().forEach(ObjectError->{
 			String filedName=e.getFieldError().getField();
 			String errorMessage = e.getFieldError().getDefaultMessage();
 			errorMap.put(filedName, errorMessage);
 		});
-	return errorMap;
+	return ResponseEntity.badRequest().body(errorMap);
 	}
 }
