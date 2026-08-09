@@ -1,10 +1,10 @@
 package com.myproject.microgreenapp.services;
 
-import org.springframework.stereotype.Service;
+import com.myproject.microgreenapp.entities.Order;
+import com.myproject.microgreenapp.requests.OrderRequest;
 
-@Service
-public class OrderService {
+public interface OrderService {
 	
-	
+	Order placeOrder(OrderRequest orderRequest);
 
 }

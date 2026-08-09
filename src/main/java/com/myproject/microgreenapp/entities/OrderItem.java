@@ -1,5 +1,8 @@
 package com.myproject.microgreenapp.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +22,8 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "contactNo")
+    @JsonBackReference
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne

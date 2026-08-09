@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myproject.microgreenapp.entities.Order;
+import com.myproject.microgreenapp.requests.OrderRequest;
 import com.myproject.microgreenapp.services.OrderService;
 
 @RestController
@@ -15,10 +17,11 @@ public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
-//	
-//	@PostMapping
-//	public ResponseEntity<Order> placeOrder(@RequestBody){
-//		
-//	}
+	
+	@PostMapping
+	public ResponseEntity<Order> placeOrder(@RequestBody OrderRequest orderRequest){
+		Order order = orderService.placeOrder(orderRequest);
+		return ResponseEntity.ok(order);	
+	}
 
 }

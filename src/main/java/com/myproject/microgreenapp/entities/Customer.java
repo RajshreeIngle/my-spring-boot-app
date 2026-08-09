@@ -3,6 +3,9 @@ package com.myproject.microgreenapp.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -32,6 +35,7 @@ public class Customer {
 	private String password;	
 	
 //	mapping changes done here dt 01-08
+	@JsonIgnore
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Order> orders = new ArrayList<>();
 }

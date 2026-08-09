@@ -3,6 +3,8 @@ package com.myproject.microgreenapp.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +27,8 @@ public class Product {
 	private String p_category;
 	private int p_stock;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "product")
-    private List<OrderItem> orderItems = new ArrayList<>();
+	private List<OrderItem> orderItems = new ArrayList<>();
 
 }

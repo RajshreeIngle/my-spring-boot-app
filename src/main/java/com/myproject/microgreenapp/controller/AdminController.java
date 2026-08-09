@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,9 +37,12 @@ public class AdminController {
 	}
 	
 	@GetMapping("/getadminbyid/{adminId}")
-	public AdminDto getAdminById(@PathVariable long adminId) {
+	public ResponseEntity<AdminDto> getAdminById(@PathVariable long adminId) {
 		Admin admin = adminService.getAdminById(adminId);
-		return adminMapper.adminToAdminDto(admin);	
+		if(admin == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(adminMapper.adminToAdminDto(admin));	
 	}
 	
 	@PostMapping("/addnewadmin")
@@ -46,10 +50,21 @@ public class AdminController {
 		return adminService.addNewAdmin(admin);	
 	}
 	
-	@PutMapping("/updateadminInfo/{adminId}")
-	public ResponseEntity<AdminDto> updateAdminInfo(@PathVariable long adminId, @RequestBody Admin admin){
-		
-		return null;
+	@PutMapping("/updateadmininfo/{adminId}")
+	public ResponseEntity<AdminDto> updateAdminInfo(@PathVariable long adminId, @RequestBody Admin admin){		
+		Admin updatedAdmin= adminService.updateAdminInfo(adminId, admin);
+		if(updatedAdmin == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(adminMapper.adminToAdminDto(updatedAdmin));
+	}
+	
+	@DeleteMapping("deleteadmin/{adminId}")
+	public ResponseEntity<Void> deleteAdmin(@PathVariable long adminId){
+		if(adminService.deleteAdmin(adminId)) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.notFound().build();
 	}
 	
 
