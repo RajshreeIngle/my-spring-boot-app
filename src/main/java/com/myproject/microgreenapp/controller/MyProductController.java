@@ -23,11 +23,11 @@ public class MyProductController {
 	@Autowired
 	private MyProductService myProductService;
 	
-	@GetMapping("/test")
-	public String testMethod() {
-		return "Good to go";
-	}
-	
+//	@GetMapping("/test")
+//	public String testMethod() {
+//		return "Good to go";
+//	}
+//	
 	@GetMapping("/getallproducts")
 	public List<Product> getAllProducts() {
 		return myProductService.getAllProducts();
