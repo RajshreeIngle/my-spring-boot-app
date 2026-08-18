@@ -9,12 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.myproject.microgreenapp.entities.Product;
-import com.myproject.microgreenapp.repository.MyProductRepository;
+import com.myproject.microgreenapp.repository.ProductRepository;
 
 @Service
 public class MyProductService {
 	@Autowired
-	MyProductRepository myProductRepository;
+	ProductRepository myProductRepository;
 
 	public List<Product> getAllProducts() {
 		return myProductRepository.findAll();

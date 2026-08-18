@@ -29,16 +29,14 @@ public class Order {
 	private LocalDateTime order_Date;
 	private String status;
     private double total_Amount;
-    
-    
+     
     @ManyToOne
-    @JoinColumn(name = "contactNo")
+    @JoinColumn(name = "customerId")
     @JsonIgnore
     private Customer customer;
 	
     @JsonManagedReference
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
-   
-	
+   	
 }

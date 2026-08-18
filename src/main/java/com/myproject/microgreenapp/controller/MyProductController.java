@@ -56,8 +56,12 @@ public class MyProductController {
 	}
 	
 	@DeleteMapping("/deleteproduct/{id}")
-	public String deleteProduct(@PathVariable int id) {
-		return myProductService.deleteProduct(id);
+	public ResponseEntity<String> deleteProduct(@PathVariable int id) {
+		String success=myProductService.deleteProduct(id);
+		if(success!= "success" ) {
+			return ResponseEntity.badRequest().body(success);
+		}
+		return ResponseEntity.ok().body("Product Deleted Successfully");
 	}
 
 }

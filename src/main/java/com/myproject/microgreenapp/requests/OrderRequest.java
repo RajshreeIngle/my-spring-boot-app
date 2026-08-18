@@ -10,7 +10,8 @@ import lombok.Data;
 public class OrderRequest {
 	
 	@NotNull(message = "Customer ID is required")
-	private long contactNo;
+	private long customerId;
+	
 	@NotEmpty(message = "Order must contain at least one product")
 	private List<OrderItemRequest> items;
 

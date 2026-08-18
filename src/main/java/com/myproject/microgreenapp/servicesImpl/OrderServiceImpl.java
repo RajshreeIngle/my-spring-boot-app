@@ -14,8 +14,8 @@ import com.myproject.microgreenapp.exceptionhandling.InsufficientStockException;
 import com.myproject.microgreenapp.exceptionhandling.ProductNotFoundException;
 import com.myproject.microgreenapp.exceptionhandling.ResourceNotFoundException;
 import com.myproject.microgreenapp.mappers.OrderResponseMapper;
-import com.myproject.microgreenapp.repository.MyCustomerRepository;
-import com.myproject.microgreenapp.repository.MyProductRepository;
+import com.myproject.microgreenapp.repository.CustomerRepository;
+import com.myproject.microgreenapp.repository.ProductRepository;
 import com.myproject.microgreenapp.repository.OrderRepository;
 import com.myproject.microgreenapp.requests.OrderItemRequest;
 import com.myproject.microgreenapp.requests.OrderRequest;
@@ -27,10 +27,10 @@ import jakarta.transaction.Transactional;
 public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
-	MyCustomerRepository customerRepository;
+	CustomerRepository customerRepository;
 	
 	@Autowired
-	MyProductRepository productRepository;
+	ProductRepository productRepository;
 	
 	@Autowired
 	OrderRepository orderRepository;
@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public OrderResponse placeOrder(OrderRequest orderRequest) {
-		Customer customer = customerRepository.findById(orderRequest.getContactNo())
+		Customer customer = customerRepository.findById(orderRequest.getCustomerId())
 				.orElseThrow(()-> new ResourceNotFoundException("Customer not Found"));
 		
 		Order order = new Order();
